@@ -12,10 +12,10 @@ public class gathering : MonoBehaviour
     public GameObject gatheredImageResult;
 
     //inventory
-    int threadInv = 0;
-    int wireInv = 0;
-    int woolInv = 0;
-    int metalInv = 0;
+    int threadInv;
+    int wireInv;
+    int woolInv;
+    int metalInv;
 
     public void menu()
     {
