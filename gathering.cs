@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class gathering : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class gathering : MonoBehaviour
     int wireInv;
     int woolInv;
     int metalInv;
+    int trashInv;
 
     public void menu()
     {
@@ -30,38 +32,44 @@ public class gathering : MonoBehaviour
 
     public void GatherStuff()
     {
-        int randomlyGatheredNumber = Random.Range(0, 4);
+        int randomlyGatheredNumber = Random.Range(0, 7);
         Debug.Log("random value:" + randomlyGatheredNumber);
-        TextMeshProUGUI TextMeshProLable = gatheredTextResult.GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI gatheredTextMsg = gatheredTextResult.GetComponent<TextMeshProUGUI>();
 
-        switch (randomlyGatheredNumber)
+        if (randomlyGatheredNumber == 0)
         {
-            case 0:
-               // gatheredThing = "thread";
-                threadInv++;
-                TextMeshProLable.text = "thread";
-                break;
-            case 1:
-                //gatheredThing = "wire";
-                wireInv++;
-                TextMeshProLable.text = "wire";
-                break;
-            case 2:
-                //gatheredThing = "wool";
-                woolInv++;
-                TextMeshProLable.text = "wool";
-                break;
-            case 3:
-                //gatheredThing = "metal";
-                TextMeshProLable.text = "metal";
-                metalInv++;
-                break;
-            default:
-                print("sadness");
-                break;
+            // gatheredThing = "thread";
+            threadInv++;
+            gatheredTextMsg.text = "thread";
         }
 
-        Debug.Log("current inventory: thread=" + threadInv + " wire=" + wireInv + " wool=" + woolInv + " metal=" + metalInv);
+        else if (randomlyGatheredNumber == 2)
+        {
+            //gatheredThing = "wire";
+            wireInv++;
+            gatheredTextMsg.text = "wire";
+        }
 
+        else if(randomlyGatheredNumber == 4)
+        {
+            //gatheredThing = "wool";
+            woolInv++;
+            gatheredTextMsg.text = "wool";
+        }
+
+        else if (randomlyGatheredNumber == 6)
+        {
+            //gatheredThing = "metal";
+            gatheredTextMsg.text = "metal";
+            metalInv++;
+        }
+        
+        else
+        {
+            gatheredTextMsg.text = "trash";
+            trashInv++;
+        }
+
+        Debug.Log("current inventory: thread=" + threadInv + " wire=" + wireInv + " wool=" + woolInv + " metal=" + metalInv + " trash=" + trashInv);
     }
 }
