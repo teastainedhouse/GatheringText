@@ -7,10 +7,7 @@ using UnityEngine.UI;
 
 public class gathering : MonoBehaviour
 {
-    //string gatheredThing;
-    
-    public GameObject gatheredTextResult;
-    public GameObject gatheredImageResult;
+    public GameObject gatheredPrefab;
 
     //inventory
     int threadInv;
@@ -34,7 +31,7 @@ public class gathering : MonoBehaviour
     {
         int randomlyGatheredNumber = Random.Range(0, 7);
         Debug.Log("random value:" + randomlyGatheredNumber);
-        TextMeshProUGUI gatheredTextMsg = gatheredTextResult.GetComponent<TextMeshProUGUI>();
+        TextMeshPro gatheredTextMsg = gatheredPrefab.GetComponent<TextMeshPro>();
 
         if (randomlyGatheredNumber == 0)
         {
