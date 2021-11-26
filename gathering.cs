@@ -7,66 +7,99 @@ using UnityEngine.UI;
 
 public class gathering : MonoBehaviour
 {
-    public GameObject gatheredPrefab;
-
     //inventory
     int threadInv;
+    int paperInv;
+    int cardboardInv;
+    int woodInv;
     int wireInv;
-    int woolInv;
+    int fluffInv;
     int metalInv;
     int trashInv;
+
+    //inventory text display
+    public TextMeshProUGUI[] displayInvText;
 
     public void menu()
     {
         Debug.Log("menu button");
         SceneManager.LoadScene("menu");
     }
-    
-    public void gather()
+
+    public void GatherButtonx1()
     {
-        GatherStuff();
+        RandomGatherStuff(1);
     }
 
-    public void GatherStuff()
+    public void GatherButtonx2()
     {
-        int randomlyGatheredNumber = Random.Range(0, 7);
-        Debug.Log("random value:" + randomlyGatheredNumber);
-        TextMeshPro gatheredTextMsg = gatheredPrefab.GetComponent<TextMeshPro>();
+        RandomGatherStuff(2);
+    }
 
-        if (randomlyGatheredNumber == 0)
-        {
-            // gatheredThing = "thread";
-            threadInv++;
-            gatheredTextMsg.text = "thread";
-        }
+    public void GatherButtonx5()
+    {
+        RandomGatherStuff(5);
+    }
 
-        else if (randomlyGatheredNumber == 2)
-        {
-            //gatheredThing = "wire";
-            wireInv++;
-            gatheredTextMsg.text = "wire";
-        }
+    public void RandomGatherStuff(int RandomGatherPulls)
+    {
+        int RunGatheringScript = 0;
 
-        else if(randomlyGatheredNumber == 4)
+        while (RandomGatherPulls > RunGatheringScript)
         {
-            //gatheredThing = "wool";
-            woolInv++;
-            gatheredTextMsg.text = "wool";
-        }
+            int randomlyGatheredNumber = Random.Range(0, 10);
+            Debug.Log("random value:" + randomlyGatheredNumber);
 
-        else if (randomlyGatheredNumber == 6)
-        {
-            //gatheredThing = "metal";
-            gatheredTextMsg.text = "metal";
-            metalInv++;
-        }
-        
-        else
-        {
-            gatheredTextMsg.text = "trash";
-            trashInv++;
-        }
+            if (randomlyGatheredNumber == 0)
+            {
+                fluffInv++;
+                displayInvText[0].text = "" + fluffInv;
+            }
 
-        Debug.Log("current inventory: thread=" + threadInv + " wire=" + wireInv + " wool=" + woolInv + " metal=" + metalInv + " trash=" + trashInv);
+            else if (randomlyGatheredNumber == 1)
+            {
+                cardboardInv++;
+                displayInvText[5].text = "" + cardboardInv;
+            }
+
+            else if (randomlyGatheredNumber == 2)
+            {
+                metalInv++;
+                displayInvText[1].text = "" + metalInv;
+            }
+
+            else if (randomlyGatheredNumber == 3)
+            {
+                threadInv++;
+                displayInvText[2].text = "" + threadInv;
+            }
+
+            else if (randomlyGatheredNumber == 4)
+            {
+                paperInv++;
+                displayInvText[3].text = "" + paperInv;
+            }
+
+            else if (randomlyGatheredNumber == 5)
+            {
+                wireInv++;
+                displayInvText[4].text = "" + wireInv;
+            }
+
+            else if (randomlyGatheredNumber == 6)
+            {
+                woodInv++;
+                displayInvText[6].text = "" + woodInv;
+            }
+
+            else
+            {
+                trashInv++;
+                displayInvText[7].text = "" + trashInv;
+            }
+
+            RunGatheringScript++;
+        }
+        Debug.Log("current inventory: thread=" + threadInv + " paper=" + paperInv + " cardboard=" + cardboardInv + " wood=" + woodInv + " wire=" + wireInv + " wool=" + fluffInv + " metal=" + metalInv + " trash=" + trashInv);
     }
 }
