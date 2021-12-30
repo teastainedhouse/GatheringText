@@ -13,14 +13,14 @@ public class gathering : MonoBehaviour
 
     //inventory
 
-    int threadInv;
-    int paperInv;
-    int cardboardInv;
-    int woodInv;
-    int wireInv;
-    int fluffInv;
-    int metalInv;
-    int trashInv;
+    public int threadInv;
+    public int paperInv;
+    public int cardboardInv;
+    public int woodInv;
+    public int wireInv;
+    public int fluffInv;
+    public int metalInv;
+    public int trashInv;
 
     //inventory text display
     public TextMeshProUGUI[] displayInvText;
@@ -35,15 +35,8 @@ public class gathering : MonoBehaviour
 
     private void Start()
     {
+        LoadPerfs();
         SetButtonColor();
-        threadInv = ES3.Load("saveThread", 0);
-        paperInv = ES3.Load("savePaper", 0);
-        cardboardInv = ES3.Load("saveCardboard", 0);
-        woodInv = ES3.Load("saveWood", 0);
-        wireInv = ES3.Load("saveWire", 0);
-        fluffInv = ES3.Load("saveFluff", 0);
-        metalInv = ES3.Load("saveMetal", 0);
-        trashInv = ES3.Load("saveTrash", 0);
 
     }
     public void menu()
@@ -56,6 +49,16 @@ public class gathering : MonoBehaviour
     {
         RandomGatherStuff();
         SetButtonColor();
+    }
+
+    public void LoadPerfs()
+    {
+        int threadInv = PlayerPrefs.GetInt("Inventory", 0);
+    }
+
+    public void SavePerfs()
+    {
+        PlayerPrefs.SetInt("Inventory", threadInv);
     }
 
     public void SetButtonColor()
@@ -110,60 +113,53 @@ public class gathering : MonoBehaviour
             {
                 fluffInv++;
                 displayInvText[0].text = "" + fluffInv;
-                ES3.Save("saveFluff", fluffInv, "gamesave.es3");
             }
 
             else if (randomlyGatheredNumber == 1)
             {
                 cardboardInv++;
                 displayInvText[5].text = "" + cardboardInv;
-                ES3.Save("saveCardboard", cardboardInv, "gamesave.es3");
             }
 
             else if (randomlyGatheredNumber == 2)
             {
                 metalInv++;
                 displayInvText[1].text = "" + metalInv;
-                ES3.Save("saveMetal", metalInv, "gamesave.es3");
             }
 
             else if (randomlyGatheredNumber == 3)
             {
                 threadInv++;
                 displayInvText[2].text = "" + threadInv;
-                ES3.Save("saveThread", threadInv, "gamesave.es3");
             }
 
             else if (randomlyGatheredNumber == 4)
             {
                 paperInv++;
                 displayInvText[3].text = "" + paperInv;
-                ES3.Save("savePaper", paperInv, "gamesave.es3");
             }
 
             else if (randomlyGatheredNumber == 5)
             {
                 wireInv++;
                 displayInvText[4].text = "" + wireInv;
-                ES3.Save("saveWire", wireInv, "gamesave.es3");
             }
 
             else if (randomlyGatheredNumber == 6)
             {
                 woodInv++;
                 displayInvText[6].text = "" + woodInv;
-                ES3.Save("saveWood", woodInv, "gamesave.es3");
             }
 
             else
             {
                 trashInv++;
                 displayInvText[7].text = "" + trashInv;
-                ES3.Save("saveTrash", trashInv, "gamesave.es3");
             }
 
             RunGatheringScript++;
         }
         Debug.Log("current inventory: thread=" + threadInv + " paper=" + paperInv + " cardboard=" + cardboardInv + " wood=" + woodInv + " wire=" + wireInv + " wool=" + fluffInv + " metal=" + metalInv + " trash=" + trashInv);
+        SavePerfs();
     }
 }
